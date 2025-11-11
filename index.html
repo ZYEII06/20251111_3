@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P5.js Sliding Menu with iFrame</title>
+    <style>
+        /* 移除瀏覽器預設邊距 */
+        body { margin: 0; overflow: hidden; } 
+        canvas { display: block; }
+        
+        /* 設置 iframe 樣式，初始隱藏並居中 */
+        #contentFrame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 確保真正的中心定位 */
+            border: 5px solid white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+            display: none; /* 初始隱藏 */
+            z-index: 999; /* 確保它在畫布上方 */
+        }
+
+        /* 漢堡圖示樣式 */
+        #hamburger {
+            position: fixed; /* 固定在視窗上 */
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 30px;
+            cursor: pointer;
+            z-index: 1001; /* 確保在最上層 */
+        }
+
+        #hamburger div {
+            width: 100%;
+            height: 4px;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        /* 選單容器樣式 */
+        #menu-container {
+            position: fixed;
+            top: 0;
+            left: -250px; /* 初始隱藏在左側 */
+            width: 250px;
+            height: 100%; 
+            background-color: rgba(255, 228, 225, 0.95); /* 馬卡龍粉背景，帶一點透明 */
+            padding-top: 60px;
+            transition: left 0.5s; /* 滑動動畫效果 */
+            z-index: 1000;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1); /* 加上細緻的陰影 */
+        }
+
+        /* 當選單開啟時的樣式 */
+        #menu-container.open {
+            left: 0; /* 滑入畫面 */
+        }
+
+        /* 選單中的按鈕樣式 */
+        #menu-container button {
+            display: block;
+            width: 85%;
+            margin: 15px auto;
+            padding: 12px;
+            background-color: #fff; /* 白色背景 */
+            color: #a9a9a9; /* 柔和的灰色文字 */
+            border: 1px solid #eee;
+            border-radius: 8px; /* 圓角 */
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        #menu-container button:hover {
+            background-color: #f0f8ff; /* 滑鼠懸停時變為愛麗絲藍 */
+            color: #778899;
+            transform: scale(1.03); /* 輕微放大 */
+        }
+
+        /* 子選單樣式 */
+        .parent-menu {
+            /* 讓父選單看起來像按鈕 */
+            display: block;
+            width: 85%;
+            margin: 15px auto;
+            padding: 12px;
+            background-color: #fff;
+            color: #a9a9a9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            position: relative; /* 為了子選單定位 */
+        }
+
+        .sub-menu {
+            display: none; /* 預設隱藏子選單 */
+            padding-left: 15px;
+            margin-top: 8px;
+        }
+
+        .sub-menu button {
+            width: 100%;
+            margin: 8px 0;
+            background-color: #f9f9f9; /* 子選單按鈕用稍淺的顏色 */
+        }
+
+        /* 當父選單被點擊時，顯示子選單 */
+        .parent-menu:hover .sub-menu {
+            display: block;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.2/addons/p5.dom.js"></script>
+    
+    <script src="sketch.js"></script> 
+</head>
+<body>
+    <iframe id="contentFrame" src="" allowfullscreen></iframe>
+</body>
+</html>

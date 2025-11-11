@@ -1,0 +1,59 @@
+/* 基本樣式 */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* 防止畫布滾動 */
+}
+
+/* 選單容器樣式 */
+#menu-container {
+    position: fixed; /* 改為 fixed 以便覆蓋在畫布上 */
+    top: 0;
+    left: 0;
+    width: 180px;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.8);
+    padding-top: 50px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out; /* 動畫效果 */
+    transform: translateX(0); /* 預設顯示 */
+}
+
+/* 漢堡圖示樣式 */
+#hamburger {
+    display: none; /* 預設隱藏 */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+#hamburger div {
+    width: 100%;
+    height: 4px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* 行動裝置響應式樣式 */
+@media (max-width: 768px) {
+    /* 在小螢幕上顯示漢堡圖示 */
+    #hamburger {
+        display: block;
+    }
+
+    /* 預設隱藏選單 */
+    #menu-container {
+        transform: translateX(-100%);
+    }
+
+    /* 當選單有 'open' class 時，將其滑出 */
+    #menu-container.open {
+        transform: translateX(0);
+    }
+}
